@@ -1,31 +1,62 @@
-export function merge(
-  collection1: number[],
-  collection2: number[],
-  collection3: number[]
-): number[] {
-  const mergedArray: number[] = [];
-  let index1 = 0;
-  let index2 = 0;
-  let index3 = 0;
+function merge(collection_1: number[], collection_2: number[], collection_3: number[]): void {
 
-  while (index1 < collection1.length || index2 < collection2.length || index3 < collection3.length) {
-    const value1 = index1 < collection1.length ? collection1[index1] : Number.MAX_VALUE;
-    const value2 = index2 < collection2.length ? collection2[index2] : Number.MIN_VALUE;
-    const value3 = index3 < collection3.length ? collection3[index3] : Number.MAX_VALUE;
-
-    const minValue = Math.min(value1, value2, value3);
-
-    if (minValue === value1) {
-      mergedArray.push(value1);
-      index1++;
-    } else if (minValue === value2) {
-      mergedArray.push(value2);
-      index2++;
-    } else {
-      mergedArray.push(value3);
-      index3++;
-    }
+  let swap = true;
+  while (swap) {
+      swap = false;
+      let i = 0;
+      while (i < collection_1.length - 1) {
+          if (collection_1[i] > collection_1[i + 1]) {
+              let temp = collection_1[i];
+              collection_1[i] = collection_1[i + 1];
+              collection_1[i + 1] = temp;
+              swap = true;
+          }
+          i++;
+      }
+      let j = 0;
+      while (j < collection_3.length - 1) {
+          if (collection_3[j] > collection_3[j + 1]) {
+              let temp = collection_3[j];
+              collection_3[j] = collection_3[j + 1];
+              collection_3[j + 1] = temp;
+              swap = true;
+          }
+          j++;
+      }
   }
 
-  return mergedArray;
+  let swapped = true;
+  while (swapped) {
+      swapped = false;
+      let i = 0;
+      while (i < collection_2.length - 1) {
+          if (collection_2[i] < collection_2[i + 1]) {
+              let temp = collection_2[i];
+              collection_2[i] = collection_2[i + 1];
+              collection_2[i + 1] = temp;
+              swapped = true;
+          }
+          i++;
+      }
+  }
+  console.log(collection_1, collection_2, collection_3);
+
+  let result = collection_1.concat(collection_2, collection_3)
+  let swappeds = true;
+  while (swappeds) {
+      swappeds = false;
+      let i = 0;
+      while (i < result.length - 1) {
+          if (result[i] > result[i + 1]) {
+              let temp = result[i];
+              result[i] = result[i + 1];
+              result[i + 1] = temp;
+              swappeds = true;
+          }
+          i++;
+      }
+  }
+  console.log(result);
 }
+
+merge([13, 16, 19, 10, 7, 4, 1], [2, 8, 5, 17, 15, 11], [20, 12, 14, 18, 9, 6, 3]);
